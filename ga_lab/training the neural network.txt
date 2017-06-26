@@ -1,0 +1,25 @@
+            // training parameters specific to EO
+            int popSize = 8;
+            int maxGeneration = 500;
+            double exitError = 0.0;
+            double mutateRate = 0.20;
+            double mutateChange = 0.01;
+            double tau = 0.40;
+
+            Console.WriteLine("\nSetting popSize = " + popSize);
+            Console.WriteLine("Setting maxGeneration = " + maxGeneration);
+            Console.Write("Setting early exit MSE error = ");
+            Console.WriteLine(exitError.ToString("F3"));
+            Console.Write("Setting mutateRate = ");
+            Console.WriteLine(mutateRate.ToString("F3"));
+            Console.Write("Setting mutateChange = ");
+            Console.WriteLine(mutateChange.ToString("F3"));
+            Console.Write("Setting tau = ");
+            Console.WriteLine(tau.ToString("F3"));
+
+            Console.WriteLine("\nBeginning training");
+            double[] bestWeights = nn.Train(trainData, popSize, maxGeneration, exitError,
+            mutateRate, mutateChange, tau);
+            Console.WriteLine("Training complete");
+            Console.WriteLine("\nFinal weights and bias values:");
+            ShowVector(bestWeights, 10, 3, true);

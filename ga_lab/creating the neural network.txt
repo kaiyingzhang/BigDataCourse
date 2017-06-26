@@ -1,0 +1,7 @@
+            Console.WriteLine("Creating a 4-6-3 neural network");
+            Console.WriteLine("Using tanh and softmax activations");
+            const int numInput = 4;
+            const int numHidden = 5;
+            const int numOutput = 3;
+            ann nn =
+            new ann(numInput, numHidden, numOutput);

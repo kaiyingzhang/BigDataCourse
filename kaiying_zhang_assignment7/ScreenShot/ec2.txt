@@ -1,0 +1,114 @@
+HadoopNameNode:
+Instance ID
+i-024310d5918366756
+Public DNS (IPv4)
+ec2-52-37-176-56.us-west-2.compute.amazonaws.com
+Instance state
+running
+IPv4 Public IP
+52.37.176.56
+172.31.17.91
+
+HadoopSecondaryNameNode:
+Instance ID
+i-099f20f5a26c22daa
+Public DNS (IPv4)
+ec2-52-38-128-24.us-west-2.compute.amazonaws.com
+Instance state
+running
+IPv4 Public IP
+52.38.128.24
+172.31.23.186
+
+Slave1:
+Instance ID
+i-0baad257481d7b015
+Public DNS (IPv4)
+ec2-35-164-120-41.us-west-2.compute.amazonaws.com
+Instance state
+running
+IPv4 Public IP
+35.164.120.41
+172.31.19.229
+
+Slave2:
+Instance ID
+i-0eb2f9530d1613ca1
+Public DNS (IPv4)
+ec2-54-70-1-35.us-west-2.compute.amazonaws.com
+Instance state
+running
+IPv4 Public IP
+54.70.1.35
+172.31.26.117
+
+Slave3:
+Public DNS (IPv4)
+ec2-35-166-232-192.us-west-2.compute.amazonaws.com
+IPv4 Public IP
+35.166.232.192
+Private IPs
+172.31.1.77
+
+Slave4:
+Public DNS (IPv4)
+ec2-52-32-102-213.us-west-2.compute.amazonaws.com
+IPv4 Public IP
+52.32.102.213
+Private IPs
+172.31.7.88
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+ESC+SHIFT+: wq ?? q ????? wq! ????
+
+export JAVA_HOME = /usr/lib/jvm/java-7-oracle
+
+<property>
+<name>fs.default.name</name>
+<value>hdfs://ec2-52-37-176-56.us-west-2.compute.amazonaws.com:8020</value>
+</property>
+<property>
+<name>hadoop.tmp.dir</name>
+<value>/home/ubuntu/hdfstmp</value>
+</property>
+
+<configuration>
+<property>
+<name>mapred.job.tracker</name>
+<value>hdfs://ec2-52-37-176-56.us-west-2.compute.amazonaws.com:8021</value>
+</property>
+</configuration>
+
+scp hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml ubuntu@ec2-52-38-128-24.us-west-2.compute.amazonaws.com:/home/ubuntu/hadoop/conf
+scp hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml ubuntu@ec2-35-164-120-41.us-west-2.compute.amazonaws.com:/home/ubuntu/hadoop/conf
+scp hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml ubuntu@ec2-54-70-1-35.us-west-2.compute.amazonaws.com:/home/ubuntu/hadoop/conf
+scp hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml ubuntu@ec2-35-166-232-192.us-west-2.compute.amazonaws.com:/home/ubuntu/hadoop/conf
+scp hadoop-env.sh core-site.xml hdfs-site.xml mapred-site.xml ubuntu@ec2-52-32-102-213.us-west-2.compute.amazonaws.com:/home/ubuntu/hadoop/conf
+
+scp hadoop-env.sh masters slaves ubuntu@ec2-35-166-232-192.us-west-2.compute.amazonaws.com:/home/ubuntu/hadoop/conf
+
+
+
+ssh ubuntu@ec2-52-38-128-24.us-west-2.compute.amazonaws.com
+
+
+eval `ssh-agent -s`
+ssh-add hadoopec2cluster.pem
+chmod 644 authorized_keys
+chmod 400 haddoec2cluster.pem
+
+hadoop dfsadmin -safemode leave
+hadoop namenode -format
+start-all.sh
+stop-all.sh
+
+hadoop dfsadmin -report
+

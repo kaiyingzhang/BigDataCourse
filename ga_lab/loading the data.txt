@@ -1,0 +1,6 @@
+            double[][] allData = LoadData("IrisData3.txt", 150, 7); // 150 rows, 7 cols
+            Console.WriteLine("Goal is to predict iris species from sepal length,");
+            Console.WriteLine("sepal width, petal length, petal width");
+            Console.WriteLine("Setosa = (1,0,0), vericolor = (0,1,0), virginica = (0,0,1)");
+            Console.WriteLine("\nThe 150-item data set is:\n");
+            ShowMatrix(allData, 4, 1, true);

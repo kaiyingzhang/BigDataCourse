@@ -1,0 +1,26 @@
+        static double[][] LoadData(string dataFile, int numRows, int numCols)
+        {
+            double[][] result = new double[numRows][];
+
+            FileStream ifs = new FileStream(dataFile, FileMode.Open);
+            StreamReader sr = new StreamReader(ifs);
+            string line = "";
+            string[] tokens = null;
+            int i = 0;
+            while ((line = sr.ReadLine()) != null)
+            {
+                if (line[0] != '/' && line[1] != '/') //allows for comments
+                {
+                    tokens = line.Split(',');
+                    result[i] = new double[numCols];
+                    for (int j = 0; j < numCols; ++j)
+                    {
+                        result[i][j] = double.Parse(tokens[j]);
+                    }
+                    ++i;
+                }
+            }
+            sr.Dispose();
+            ifs.Dispose();
+            return result;
+        }

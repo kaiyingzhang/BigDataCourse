@@ -1,0 +1,10 @@
+            nn.SetWeights(bestWeights);
+            double trainAcc = nn.Accuracy(trainData);
+            Console.Write("\nAccuracy on training data = ");
+            Console.WriteLine(trainAcc.ToString("F4"));
+
+            double testAcc = nn.Accuracy(testData);
+            Console.Write("\nAccuracy on test data = ");
+            Console.WriteLine(testAcc.ToString("F4"));
+
+            Console.ReadLine();

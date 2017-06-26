@@ -1,0 +1,27 @@
+        static void SplitData(double[][] allData, double trainPct,
+            int seed, out double[][] trainData, out double[][] testData)
+        {
+            Random rnd = new Random(seed);
+            int totRows = allData.Length;
+            int numTrainRows = (int)(totRows * trainPct); // usually 0.80
+            int numTestRows = totRows - numTrainRows;
+            trainData = new double[numTrainRows][];
+            testData = new double[numTestRows][];
+
+            double[][] copy = new double[allData.Length][]; // ref copy of data
+            for (int i = 0; i < copy.Length; ++i)
+                copy[i] = allData[i];
+
+            for (int i = 0; i < copy.Length; ++i) // scramble order of copy
+            {
+                int r = rnd.Next(i, copy.Length); // use Fisher-Yates
+                double[] tmp = copy[r];
+                copy[r] = copy[i];
+                copy[i] = tmp;
+            }
+            for (int i = 0; i < numTrainRows; ++i) // by ref
+                trainData[i] = copy[i];
+
+            for (int i = 0; i < numTestRows; ++i)
+                testData[i] = copy[i + numTrainRows];
+        } // SplitData

@@ -1,0 +1,10 @@
+            double[][] trainData = null;
+            double[][] testData = null;
+            double trainPct = 0.80;
+            int splitSeed = 1;
+            Console.WriteLine("Splitting data into 80% train, 20% test");
+            SplitData(allData, trainPct, splitSeed, out trainData, out testData);
+            Console.WriteLine("\nThe training data is:\n");     
+            ShowMatrix(trainData, 4, 1, true);
+            Console.WriteLine("The test data is:\n");     
+            ShowMatrix(testData, 3, 1, true);
